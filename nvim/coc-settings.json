@@ -1,0 +1,15 @@
+{
+    "python.jediEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+
+    "languageserver": {
+     "ocaml": {
+       "command": "ocaml-language-server",
+       "args": ["--stdio"],
+
+       "filetypes": ["ocaml", "reason"]
+     }
+  },
+  "clangd.path": "/home/batata/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin/clangd"
+}
