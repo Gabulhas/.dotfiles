@@ -1,42 +1,53 @@
-filetype plugin indent on
-
 
 call plug#begin('~/.local/share/nvim/plugged')
 
     "------------ General use Plugins ---------------""
+    
+    " Rainbow parentheses
+    Plug 'luochen1990/rainbow'
+    
     "file explorer
     Plug 'preservim/nerdtree'
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    Plug 'ryanoasis/vim-devicons'
 
+
+    " auto () [] {}
     Plug 'jiangmiao/auto-pairs'
     
     " Tagbar
     Plug 'majutsushi/tagbar'
 
+    " fzf
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+
     
     " Using plug
     Plug 'dylanaraps/wal', {'as': 'wal'}
 
+    Plug 'https://gitlab.com/bloodflame/wal.vim'
+    Plug 'itchyny/lightline.vim'
 
-    " Rainbow parentheses
-    Plug 'luochen1990/rainbow'
 
-    Plug 'vim-airline/vim-airline'
 
 
     "syntax
-    "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 
     "completion
     Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['ocaml', 'go', 'elixir', 'tex']}
     Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['ocaml', 'go', 'elixir','tex']}
 
+    " highlighted yank
+    Plug 'machakann/vim-highlightedyank'
+
 
 
     "------------ Language Specific Plugins ---------------""
 
     "Python
-    "Plug 'davidhalter/jedi-vim', {'for' : ['python']}
     Plug 'Vimjas/vim-python-pep8-indent', {'for' : ['python']}
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'for': ['python'] }
     Plug 'zchee/deoplete-jedi', {'for' : ['python']}
@@ -50,21 +61,27 @@ call plug#begin('~/.local/share/nvim/plugged')
     "Golang
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for':['go'] }
     
+    " LaTeX
+    Plug 'lervag/vimtex', {'for': 'tex'}
+
 
 
 call plug#end()
 
 
-let g:airline_theme='wal'
-let g:airline_symbols = {}
-    "'linenr':'≡',
-    "'maxlinenr':'◊'
 
-let g:airline_symbols.linenr = ' ≡'
-let g:airline_symbols.maxlinenr = ' ◊'
-let g:airline_symbols.whitespace = ' ‡'
-
-
+filetype plugin indent on
+let g:lightline = {
+      \ 'colorscheme': 'wal',
+      \ 'active': {
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'filetype'] ]
+      \ },
+      \ 'component': {
+      \   'lineinfo': '%3l:%-2v%<',
+      \ },
+      \ }
 
 
 
@@ -73,15 +90,17 @@ let mapleader = "\<Space>"
 let maplocalleader = "«"
 map <Space> <Leader>
 
+set splitbelow
 
 " terminal mode
-nnoremap <silent> <Leader>t :terminal<CR>i
+nnoremap <silent> <Leader>nt :terminal<CR>i
+nnoremap <silent> <Leader>t :15sp <CR> :terminal<CR> i
 tnoremap <Esc> <C-\><C-n>
 
 " fzf files
 nnoremap <silent> <Leader>cf :Files ~<CR>
 nnoremap <silent> <Leader>z :FZF ~<CR>
-nnoremap <silent> <Leader>f :Files %:p:h<CR>
+nnoremap <silent> <Leader>f :Files <C-R>=expand('%:h')<CR><CR>
 nnoremap <silent> <Leader>cr :Rg<CR>
 
 
@@ -100,7 +119,6 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
 """Vim configs
-" enable syntax highlighting
 syntax enable
 
 
@@ -120,12 +138,14 @@ set number
 " max menu size
 set pumheight=10
 
-
 " when using the >> or << commands, shift lines by 4 spaces
 set shiftwidth=4
 
 " show the matching part of the pair for [] {} and ()
 set showmatch
+
+"utf
+set encoding=UTF-8
 
 
 """nerdtree configs
@@ -158,6 +178,19 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Because of shiftclick :
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall
+
+
 
 " latex pdfviewer
 let g:livepreview_previewer = 'qpdfview'
@@ -174,5 +207,19 @@ let g:highlightedyank_highlight_duration =200
 nmap <F8> :TagbarToggle<CR>
 
 
+"treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = {"lingua"},  -- list of language that will be disabled
+  },
+}
+EOF
+
+" Run project specific .vimrc files
+set exrc
+set secure
 
 
