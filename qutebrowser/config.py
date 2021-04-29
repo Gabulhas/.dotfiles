@@ -1,6 +1,16 @@
 import subprocess
 import os
 from qutebrowser.api import interceptor
+import re
+import yaml
+
+
+c = c  # noqa: F821 pylint: disable=E0602,C0103
+config = config  # noqa: F821 pylint: disable=E0602,C0103
+
+# Load autoconfig.yml
+config.load_autoconfig()
+
 
 """
 qutebrowser settings for video
@@ -9,24 +19,32 @@ https://qutebrowser.org/doc/help/settings.html
 """
 
 # ================== Youtube Add Blocking ======================= {{{
-def filter_yt(info: interceptor.Request):
+def pipe_to_mpv(info: interceptor.Request):
     """Block the given request if necessary."""
     url = info.request_url
-    if (
-        url.host() == "www.youtube.com"
-        and url.path() == "/get_video_info"
-        and "&adformat=" in url.query()
-    ):
-        info.block()
+    if (url.host() == "www.youtube.com"and url.path() == "/watch"and "v" in url.query()):
+        os.system(f"mpv {url.toString()}") 
 
 
-interceptor.register(filter_yt)
+
+interceptor.register(pipe_to_mpv)
 # }}}
 # =================== Launch Qutebrowser from Dmenu ====== {{{
 
     # }}}
 # ====================== xresources ======================= {{{
 # taken from https://qutebrowser.org/doc/help/configuring.html
+
+
+
+c.url.searchengines = {
+    'DEFAULT':  'https://google.com/search?hl=en&q={}',
+    '!d':       'https://duckduckgo.com/?ia=web&q={}',
+    '!fb':      'https://www.facebook.com/s.php?q={}',
+    '!gh':      'https://github.com/search?o=desc&q={}&s=stars',
+    '!gi':      'https://www.google.com/search?tbm=isch&q={}&tbs=imgo:1',
+    '!yt':      'https://www.youtube.com/results?search_query={}'
+}
 
 def read_xresources(prefix):
     props = {}
@@ -40,6 +58,7 @@ def read_xresources(prefix):
 
 xresources = read_xresources("*")
 
+"""
 
 config.set("colors.webpage.darkmode.enabled", True)
 c.colors.statusbar.normal.bg = xresources["*.background"]
@@ -78,5 +97,4 @@ if xresources["*.background"] != "#ffffff":
     # c.colors.webpage.prefers_color_scheme_dark = True
     c.colors.webpage.darkmode.enabled = True
     c.hints.border = "1px solid #FFFFFF"
-
-config.load_autoconfig()
+"""
