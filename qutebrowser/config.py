@@ -3,6 +3,7 @@ import os
 from qutebrowser.api import interceptor
 import re
 import yaml
+import subprocess
 
 
 c = c  # noqa: F821 pylint: disable=E0602,C0103
@@ -23,9 +24,7 @@ def pipe_to_mpv(info: interceptor.Request):
     """Block the given request if necessary."""
     url = info.request_url
     if (url.host() == "www.youtube.com"and url.path() == "/watch"and "v" in url.query()):
-        os.system(f"mpv {url.toString()}") 
-
-
+        subprocess.call(["mpv", "url.toString()"])
 
 interceptor.register(pipe_to_mpv)
 # }}}

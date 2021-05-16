@@ -11,7 +11,9 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
+    WINIT_HIDPI_FACTOR: "1.5"
+    WINIT_X11_SCALE_FACTOR: "1"
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
@@ -100,12 +102,13 @@
 
 # Font configuration
 font:
-
   normal:
-    family: GohuFont Nerd Font
+    family: Misc Termsyn
     style: Regular
-  size: 7
 
+  bold:
+    family: Misc Termsyn
+    style: Bold
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter

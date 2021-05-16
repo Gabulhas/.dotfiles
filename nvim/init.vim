@@ -8,8 +8,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     
     "file explorer
     Plug 'preservim/nerdtree'
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-    Plug 'ryanoasis/vim-devicons'
+    "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    "Plug 'ryanoasis/vim-devicons'
 
 
     " auto () [] {}
@@ -27,22 +27,22 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'dylanaraps/wal', {'as': 'wal'}
 
     Plug 'https://gitlab.com/bloodflame/wal.vim'
-    Plug 'itchyny/lightline.vim'
+    "Plug 'itchyny/lightline.vim'
 
 
-
+    "Better Terminal in VIM
+    Plug 'kassio/neoterm'
 
     "syntax
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 
     "completion
-    Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['ocaml', 'go', 'elixir', 'tex']}
-    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['ocaml', 'go', 'elixir','tex']}
+    Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['ocaml', 'go', 'elixir','tex', 'html', 'htmldjango']}
+    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['ocaml', 'go', 'elixir','tex', 'html', 'htmldjango']}
 
     " highlighted yank
     Plug 'machakann/vim-highlightedyank'
-
 
 
     "------------ Language Specific Plugins ---------------""
@@ -64,30 +64,33 @@ call plug#begin('~/.local/share/nvim/plugged')
     " LaTeX
     Plug 'lervag/vimtex', {'for': 'tex'}
 
-
+    " Markdown
+    Plug 'npxbr/glow.nvim', {'do': ':GlowInstall', 'for':['markdown']}
 
 call plug#end()
+
+colorscheme wal
 
 
 
 filetype plugin indent on
-let g:lightline = {
-      \ 'colorscheme': 'wal',
-      \ 'active': {
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'filetype'] ]
-      \ },
-      \ 'component': {
-      \   'lineinfo': '%3l:%-2v%<',
-      \ },
-      \ }
+
+"let g:lightline = {
+"      \ 'colorscheme': 'wal',
+"      \ 'active': {
+"      \   'right': [ [ 'lineinfo' ],
+"      \              [ 'filetype'] ]
+"      \ },
+"      \ 'component': {
+"      \   'lineinfo': '%3l:%-2v%<',
+"      \ },
+"      \ }
 
 
 
 "Leader
 let mapleader = "\<Space>"
-let maplocalleader = "«"
+let maplocalleader = "\\"
 map <Space> <Leader>
 
 set splitbelow
@@ -99,9 +102,35 @@ tnoremap <Esc> <C-\><C-n>
 
 " fzf files
 nnoremap <silent> <Leader>cf :Files ~<CR>
+nnoremap <silent> <Leader>f :Files %:p:h<CR>
 nnoremap <silent> <Leader>z :FZF ~<CR>
-nnoremap <silent> <Leader>f :Files <C-R>=expand('%:h')<CR><CR>
+"nnoremap <silent> <Leader>f :Files <C-R>=expand('%:h')<CR><CR>
 nnoremap <silent> <Leader>cr :Rg<CR>
+
+" coc
+
+
+" GoTo code navigation.
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+
+
+" Use K to show documentation in preview window.
+nnoremap <leader> K :call <SID>show_documentation()<CR>
 
 
 " spell
@@ -160,6 +189,17 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
+
+"""VIM-GO configs
+
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 2
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_format_strings = 1
+
+
 """merlin configs
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
@@ -193,7 +233,9 @@ cnoreabbrev Qall qall
 
 
 " latex pdfviewer
-let g:livepreview_previewer = 'qpdfview'
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_general_viewer = 'zathura'
+let g:vimtex_context_pdf_viewer = 'zathura'
 
 
 " fix hightlight paren for alacritty + wal.vim
@@ -212,11 +254,42 @@ lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
-    enable = true,              -- false will disable the whole extension
+    enable = false,              -- false will disable the whole extension
     disable = {"lingua"},  -- list of language that will be disabled
   },
 }
 EOF
+
+
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'p:protocols',
+        \ 'm:modules',
+        \ 'e:exceptions',
+        \ 'y:types',
+        \ 'd:delegates',
+        \ 'f:functions',
+        \ 'c:callbacks',
+        \ 'a:macros',
+        \ 't:tests',
+        \ 'i:implementations',
+        \ 'o:operators',
+        \ 'r:records'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 'p' : 'protocol',
+        \ 'm' : 'module'
+    \ },
+    \ 'scope2kind' : {
+        \ 'protocol' : 'p',
+        \ 'module' : 'm'
+    \ },
+    \ 'sort' : 0
+\ }
+
+
 
 " Run project specific .vimrc files
 set exrc
