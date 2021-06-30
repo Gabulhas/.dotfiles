@@ -3,6 +3,6 @@ configuration {
     width:20;
     lines:5;
     bordercolor:  @foreground;
-    font: "GohuNew 11";
+    font: "Cozette 11";
     terminal: "alacritty";
 }

@@ -1,4 +1,3 @@
-
 call plug#begin('~/.local/share/nvim/plugged')
 
     "------------ General use Plugins ---------------""
@@ -19,9 +18,13 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'majutsushi/tagbar'
 
     " fzf
+    " TODO: remove
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
 
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
     
     " Using plug
     Plug 'dylanaraps/wal', {'as': 'wal'}
@@ -38,8 +41,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 
     "completion
-    Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['ocaml', 'go', 'elixir','tex', 'html', 'htmldjango']}
-    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['ocaml', 'go', 'elixir','tex', 'html', 'htmldjango']}
+    Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['ocaml', 'go', 'elixir','tex', 'html', 'htmldjango','javascript']}
+    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile', 'for': ['ocaml', 'go', 'elixir','tex', 'html', 'htmldjango','javascript']}
 
     " highlighted yank
     Plug 'machakann/vim-highlightedyank'
@@ -67,6 +70,9 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Markdown
     Plug 'npxbr/glow.nvim', {'do': ':GlowInstall', 'for':['markdown']}
 
+    "Gleam
+    Plug 'gleam-lang/gleam.vim'
+
 call plug#end()
 
 colorscheme wal
@@ -74,18 +80,6 @@ colorscheme wal
 
 
 filetype plugin indent on
-
-"let g:lightline = {
-"      \ 'colorscheme': 'wal',
-"      \ 'active': {
-"      \   'right': [ [ 'lineinfo' ],
-"      \              [ 'filetype'] ]
-"      \ },
-"      \ 'component': {
-"      \   'lineinfo': '%3l:%-2v%<',
-"      \ },
-"      \ }
-
 
 
 "Leader
@@ -96,20 +90,27 @@ map <Space> <Leader>
 set splitbelow
 
 " terminal mode
-nnoremap <silent> <Leader>nt :terminal<CR>i
-nnoremap <silent> <Leader>t :15sp <CR> :terminal<CR> i
-tnoremap <Esc> <C-\><C-n>
+"nnoremap <silent> <Leader>nt :terminal<CR>i
+"nnoremap <silent> <Leader>t :15sp <CR> :terminal<CR> i
+"tnoremap <Esc> <C-\><C-n>:q!<CR>
+
 
 " fzf files
-nnoremap <silent> <Leader>cf :Files ~<CR>
-nnoremap <silent> <Leader>f :Files %:p:h<CR>
-nnoremap <silent> <Leader>z :FZF ~<CR>
-"nnoremap <silent> <Leader>f :Files <C-R>=expand('%:h')<CR><CR>
-nnoremap <silent> <Leader>cr :Rg<CR>
+"nnoremap <silent> <Leader>cf :Files ~<CR>
+"nnoremap <silent> <Leader>f :Files %:p:h<CR>
+"nnoremap <silent> <Leader>z :FZF ~<CR>
+"nnoremap <silent> <Leader>cr :Rg<CR>
+
+
+
+
+" Telescope
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " coc
-
-
 " GoTo code navigation.
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -198,6 +199,8 @@ let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_format_strings = 1
 let g:go_highlight_format_strings = 1
+let g:go_auto_type_info = 1
+
 
 
 """merlin configs
