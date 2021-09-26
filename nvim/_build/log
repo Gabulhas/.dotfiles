@@ -1,0 +1,146 @@
+# dune utop
+# OCAMLPARAM: unset
+# Workspace root: /home/guilherme/.config/nvim
+$ /usr/bin/nproc > /tmp/dunee87458.output 2> /dev/null
+# Auto-detected concurrency: 12
+# disable binary cache
+$ /usr/bin/ocamlc.opt -config > /tmp/dune0edc02.output
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dyn
+#  ; merlin = true
+#  ; for_host = None
+#  ; fdo_target_exe = None
+#  ; build_dir = "default"
+#  ; toplevel_path = Some External "/home/guilherme/.opam/default/lib/toplevel"
+#  ; ocaml_bin = External "/usr/bin"
+#  ; ocaml = Ok External "/home/guilherme/.opam/default/bin/ocaml"
+#  ; ocamlc = External "/usr/bin/ocamlc.opt"
+#  ; ocamlopt = Ok External "/usr/bin/ocamlopt.opt"
+#  ; ocamldep = Ok External "/usr/bin/ocamldep.opt"
+#  ; ocamlmklib = Ok External "/usr/bin/ocamlmklib.opt"
+#  ; env =
+#      map
+#        { "DUNE_OCAML_HARDCODED" : "/home/guilherme/.opam/default/lib"
+#        ; "DUNE_OCAML_STDLIB" : "/usr/lib/ocaml"
+#        ; "DUNE_SOURCEROOT" : "/home/guilherme/.config/nvim"
+#        ; "INSIDE_DUNE" : "/home/guilherme/.config/nvim/_build/default"
+#        ; "OCAMLFIND_IGNORE_DUPS_IN" :
+#            "/home/guilherme/.config/nvim/_build/install/default/lib"
+#        ; "OCAMLPATH" :
+#            "/home/guilherme/.config/nvim/_build/install/default/lib"
+#        ; "OCAMLTOP_INCLUDE_PATH" :
+#            "/home/guilherme/.config/nvim/_build/install/default/lib/toplevel"
+#        ; "OCAML_COLOR" : "always"
+#        ; "OPAMCOLOR" : "always"
+#        }
+#  ; findlib_path = [ External "/home/guilherme/.opam/default/lib" ]
+#  ; arch_sixtyfour = true
+#  ; natdynlink_supported = true
+#  ; supports_shared_libraries = true
+#  ; ocaml_config =
+#      { version = "4.12.0"
+#      ; standard_library_default = "/usr/lib/ocaml"
+#      ; standard_library = "/usr/lib/ocaml"
+#      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
+#      ; ccomp_type = "cc"
+#      ; c_compiler = "gcc"
+#      ; ocamlc_cflags =
+#          [ "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-fPIC"
+#          ; "-march=x86-64"
+#          ; "-mtune=generic"
+#          ; "-O2"
+#          ; "-pipe"
+#          ; "-fno-plt"
+#          ]
+#      ; ocamlc_cppflags =
+#          [ "-D_FILE_OFFSET_BITS=64"; "-D_REENTRANT"; "-D_FORTIFY_SOURCE=2" ]
+#      ; ocamlopt_cflags =
+#          [ "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-fPIC"
+#          ; "-march=x86-64"
+#          ; "-mtune=generic"
+#          ; "-O2"
+#          ; "-pipe"
+#          ; "-fno-plt"
+#          ]
+#      ; ocamlopt_cppflags =
+#          [ "-D_FILE_OFFSET_BITS=64"; "-D_REENTRANT"; "-D_FORTIFY_SOURCE=2" ]
+#      ; bytecomp_c_compiler =
+#          [ "gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-fPIC"
+#          ; "-march=x86-64"
+#          ; "-mtune=generic"
+#          ; "-O2"
+#          ; "-pipe"
+#          ; "-fno-plt"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ; "-D_REENTRANT"
+#          ; "-D_FORTIFY_SOURCE=2"
+#          ]
+#      ; bytecomp_c_libraries = [ "-lm"; "-ldl"; "-lpthread" ]
+#      ; native_c_compiler =
+#          [ "gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-fPIC"
+#          ; "-march=x86-64"
+#          ; "-mtune=generic"
+#          ; "-O2"
+#          ; "-pipe"
+#          ; "-fno-plt"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ; "-D_REENTRANT"
+#          ; "-D_FORTIFY_SOURCE=2"
+#          ]
+#      ; native_c_libraries = [ "-lm"; "-ldl" ]
+#      ; cc_profile = []
+#      ; architecture = "amd64"
+#      ; model = "default"
+#      ; int_size = 63
+#      ; word_size = 64
+#      ; system = "linux"
+#      ; asm = [ "as" ]
+#      ; asm_cfi_supported = true
+#      ; with_frame_pointers = false
+#      ; ext_exe = ""
+#      ; ext_obj = ".o"
+#      ; ext_asm = ".s"
+#      ; ext_lib = ".a"
+#      ; ext_dll = ".so"
+#      ; os_type = "Unix"
+#      ; default_executable_name = "a.out"
+#      ; systhread_supported = true
+#      ; host = "x86_64-pc-linux-gnu"
+#      ; target = "x86_64-pc-linux-gnu"
+#      ; profiling = false
+#      ; flambda = false
+#      ; spacetime = false
+#      ; safe_string = false
+#      ; exec_magic_number = "Caml1999X029"
+#      ; cmi_magic_number = "Caml1999I029"
+#      ; cmo_magic_number = "Caml1999O029"
+#      ; cma_magic_number = "Caml1999A029"
+#      ; cmx_magic_number = "Caml1999Y029"
+#      ; cmxa_magic_number = "Caml1999Z029"
+#      ; ast_impl_magic_number = "Caml1999M029"
+#      ; ast_intf_magic_number = "Caml1999N029"
+#      ; cmxs_magic_number = "Caml1999D029"
+#      ; cmt_magic_number = "Caml1999T029"
+#      ; natdynlink_supported = true
+#      ; supports_shared_libraries = true
+#      ; windows_unicode = false
+#      }
+#  }
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -24 -g -bin-annot -I .utop/.utop.eobjs/byte -I /home/guilherme/.opam/default/lib/bytes -I /home/guilherme/.opam/default/lib/camomile -I /home/guilherme/.opam/default/lib/camomile/default_config -I /home/guilherme/.opam/default/lib/camomile/dyn -I /home/guilherme/.opam/default/lib/camomile/lib_default -I /home/guilherme/.opam/default/lib/camomile/library -I /home/guilherme/.opam/default/lib/charInfo_width -I /home/guilherme/.opam/default/lib/findlib -I /home/guilherme/.opam/default/lib/lambda-term -I /home/guilherme/.opam/default/lib/lwt -I /home/guilherme/.opam/default/lib/lwt/unix -I /home/guilherme/.opam/default/lib/lwt_log -I /home/guilherme/.opam/default/lib/lwt_log/core -I /home/guilherme/.opam/default/lib/lwt_react -I /home/guilherme/.opam/default/lib/mew -I /home/guilherme/.opam/default/lib/mew_vi -I /home/guilherme/.opam/default/lib/mmap -I /home/guilherme/.opam/default/lib/ocplib-endian -I /home/guilherme/.opam/default/lib/ocplib-endian/bigstring -I /home/guilherme/.opam/default/lib/react -I /home/guilherme/.opam/default/lib/result -I /home/guilherme/.opam/default/lib/seq -I /home/guilherme/.opam/default/lib/trie -I /home/guilherme/.opam/default/lib/utop -I /home/guilherme/.opam/default/lib/zed -I /usr/lib/ocaml/compiler-libs -I /usr/lib/ocaml/threads -no-alias-deps -o .utop/.utop.eobjs/byte/dune__exe__Utop.cmo -c -impl .utop/utop.ml-gen)
+$ (cd _build/default && /usr/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -24 -g -o .utop/utop.exe -output-complete-exe /usr/lib/ocaml/compiler-libs/ocamlcommon.cma /usr/lib/ocaml/compiler-libs/ocamlbytecomp.cma /usr/lib/ocaml/compiler-libs/ocamltoplevel.cma /home/guilherme/.opam/default/lib/findlib/findlib.cma /home/guilherme/.opam/default/lib/findlib/findlib_top.cma /home/guilherme/.opam/default/lib/result/result.cma /home/guilherme/.opam/default/lib/lwt/lwt.cma /usr/lib/ocaml/unix.cma -I /usr/lib/ocaml /usr/lib/ocaml/bigarray.cma -I /usr/lib/ocaml /home/guilherme/.opam/default/lib/mmap/mmap.cma /home/guilherme/.opam/default/lib/ocplib-endian/ocplib_endian.cma /home/guilherme/.opam/default/lib/ocplib-endian/bigstring/ocplib_endian_bigstring.cma /usr/lib/ocaml/threads/threads.cma -I /usr/lib/ocaml /home/guilherme/.opam/default/lib/lwt/unix/lwt_unix.cma -I /home/guilherme/.opam/default/lib/lwt/unix /home/guilherme/.opam/default/lib/react/react.cma /home/guilherme/.opam/default/lib/lwt_react/lwt_react.cma /home/guilherme/.opam/default/lib/camomile/default_config/camomileDefaultConfig.cma /home/guilherme/.opam/default/lib/camomile/library/camomileLibrary.cma /home/guilherme/.opam/default/lib/camomile/lib_default/camomileLibraryDefault.cma /home/guilherme/.opam/default/lib/camomile/dyn/camomileLibraryDyn.cma /home/guilherme/.opam/default/lib/camomile/camomile_yuge.cma /home/guilherme/.opam/default/lib/charInfo_width/charInfo_width.cma /home/guilherme/.opam/default/lib/zed/zed.cma /home/guilherme/.opam/default/lib/lwt_log/core/lwt_log_core.cma /home/guilherme/.opam/default/lib/lwt_log/lwt_log.cma /home/guilherme/.opam/default/lib/trie/trie.cma /home/guilherme/.opam/default/lib/mew/mew.cma /home/guilherme/.opam/default/lib/mew_vi/mew_vi.cma /home/guilherme/.opam/default/lib/lambda-term/lambda_term.cma -I /home/guilherme/.opam/default/lib/lambda-term /home/guilherme/.opam/default/lib/utop/uTop.cma .utop/.utop.eobjs/byte/dune__exe__Utop.cmo -linkall -warn-error -31)
