@@ -2,20 +2,14 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     "------------ General use Plugins ---------------""
     
-    "Dev icons
-    Plug 'kyazdani42/nvim-web-devicons'
-    
-    "Rainbow parentheses
-    Plug 'luochen1990/rainbow'
-    
     "file explorer
     Plug 'kyazdani42/nvim-tree.lua'
 
+    " zen mode
+    Plug 'junegunn/goyo.vim'
+
     "auto () [] {}
     Plug 'jiangmiao/auto-pairs'
-    
-    "Tagbar
-    Plug 'majutsushi/tagbar'
 
     "Telescope
     Plug 'nvim-lua/popup.nvim'
@@ -29,9 +23,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     "Plug 'https://gitlab.com/bloodflame/wal.vim'
 
-    "Better Terminal in VIM
-    Plug 'kassio/neoterm'
-
     "syntax
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
@@ -41,7 +32,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     "Languages
     let elixir_types = ['elixir', 'eelixir']
-    let languages = ['ocaml', 'go', 'tex', 'html', 'htmldjango','javascript', 'c', 'cpp', 'haskell', 'nim', 'python']  + elixir_types
+    let languages = ['ocaml', 'go', 'tex', 'html', 'htmldjango','javascript', 'c', 'cpp', 'haskell', 'nim', 'python', 'rust', 'cs']  + elixir_types
 
     "completion
     Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': languages}
@@ -51,7 +42,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make', 'for': languages }
 
     " Neoformat
-    Plug 'sbdchd/neoformat', {'for' : ['ocaml', 'python']}
+    Plug 'sbdchd/neoformat', {'for' : ['ocaml', 'python', 'rust']}
     "
     "------------ Language Specific Plugins ---------------""
 
@@ -60,7 +51,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'neovimhaskell/haskell-vim', {'for' : ['haskell']}
 
     "Python
-    Plug 'Vimjas/vim-python-pep8-indent', {'for' : []}
+    Plug 'Vimjas/vim-python-pep8-indent', {'for' : ['python']}
 
     "Elixir
     Plug 'elixir-editors/vim-elixir', {'for':elixir_types}
@@ -76,41 +67,31 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'npxbr/glow.nvim', {'do': ':GlowInstall', 'for':['markdown']}
 
     "Gleam
-    Plug 'gleam-lang/gleam.vim'
+    Plug 'gleam-lang/gleam.vim', {'for' : ['gleam']}
 
     "Nim
-    Plug 'alaviss/nim.nvim'
-
-
-
+    Plug 'alaviss/nim.nvim', {'for' : ['nim']}
 
 call plug#end()
 
+
+
+"""Vim basic configs
 colorscheme wal
-
-
-"""Vim configs
 set splitbelow
+
 syntax enable
+
 filetype plugin indent on
-" Speed up scrolling in Vim
 set ttyfast
-"set number relativenumber
-
-"show line numbers
 set number
-
-"max menu size
 set pumheight=10
-
-"when using the >> or << commands, shift lines by 4 spaces
 set shiftwidth=4
-
-"show the matching part of the pair for [] {} and ()
 set showmatch
-
-"utf
 set encoding=UTF-8
+set scrolloff=12
+set exrc
+set secure
 
 "Leader
 let mapleader = "\<Space>"
@@ -124,8 +105,8 @@ nnoremap <silent> <Leader>nt :!($TERM &)<CR>i
 " Telescope
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope current_buffer_fuzzy_find sorting_strategy=ascending prompt_position=top <cr>
 nnoremap <leader>fw <cmd>Telescope buffers<cr>
-nnoremap <leader>fb <cmd>Telescope file_browser<cr>
 nnoremap <leader>fc <cmd>Telescope commands<cr>
 
 " coc
@@ -139,6 +120,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> ge <Plug>(coc-diagonostics)
 
 nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
@@ -147,36 +129,13 @@ inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float
 vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
-
-" Use K to show documentation in preview window.
-nnoremap <leader> K :call <SID>show_documentation()<CR>
-
-" tagbar
-nmap <F8> :TagbarToggle<CR>
-
 " spell
 nnoremap <silent> <Leader>s :set spell!<CR>
 
-" start rainbow parentheses
-let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
-
-"deoplete
-let g:deoplete#enable_at_startup = 1
-
 " scroll using tab
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-"""merlin configs
-let g:opamshare = substitute(system('opam var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-
-
-execute "autocmd FileType ocaml source".g:opamshare."/ocp-indent/vim/indent/ocaml.vim"
-
-
-" Display x lines above/below the cursor when scrolling with a mouse.
-set scrolloff=12
 
 
 """nvim-tree configs
@@ -188,11 +147,7 @@ let g:nvim_tree_show_icons = {
     \ 'folder_arrows': 0,
     \ }
 
-
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-
+"
 """ Neoformat
 " Enable alignment
 let g:neoformat_basic_format_align = 1
@@ -202,14 +157,6 @@ let g:neoformat_basic_format_retab = 1
 
 " Enable trimmming of trailing whitespace
 let g:neoformat_basic_format_trim = 1
-
-
-
-"""ale configs
-let g:ale_linters = {
-	    \   'python': ['flake8', 'pylint'],
-	    \   'javascript': ['eslint'],
-	    \}
 
 
 " better window navigation, cause CTRL+W+DIRECTION sucks
@@ -230,6 +177,9 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
 
+" Center search results 
+nnoremap n nzz
+nnoremap N Nzz
 
 
 " fix hightlight paren for alacritty + wal.vim
@@ -239,28 +189,23 @@ highlight MatchParen ctermfg=white ctermbg=green cterm=NONE
 " yank animation
 let g:highlightedyank_highlight_duration =200
 
-" Telescope Extensions
-
-
-
+" this has to be here for some reason lmao
+let g:opamshare = substitute(system('opam var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 "treesitter
 lua <<EOF
+require'nvim-treesitter.configs'.setup {}
 require'nvim-treesitter.configs'.setup {
-ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-highlight = {
-enable = true,              -- false will disable the whole extension
-disable = {"lingua"},  -- list of language that will be disabled
-},
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = {"lingua"},  -- list of language that will be disabled
+  },
 }
-
+require'nvim-tree'.setup {}
 require('telescope').load_extension('coc')
 require('telescope').load_extension('fzf')
 EOF
-
-
-" Run project specific .vimrc files
-set exrc
-set secure
 
 

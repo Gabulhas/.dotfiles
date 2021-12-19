@@ -9,8 +9,11 @@ import subprocess
 c = c  # noqa: F821 pylint: disable=E0602,C0103
 config = config  # noqa: F821 pylint: disable=E0602,C0103
 
+config.set("colors.webpage.darkmode.enabled", True)
+
 # Load autoconfig.yml
 config.load_autoconfig()
+config.source('qutewal.py')
 
 
 """

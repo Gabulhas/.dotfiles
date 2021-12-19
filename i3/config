@@ -30,7 +30,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+exec --no-startup-id xinput set-prop 12 347 1
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -201,6 +201,7 @@ exec_always picom --config ~/.config/picom/picom.conf
 exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
 
 
+
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec brightnessctl s 3000+
 bindsym XF86MonBrightnessDown exec brightnessctl s 3000-
@@ -291,7 +292,7 @@ bindsym $mod+z+l move workspace to output eDP-1
 
 # wallpaper menu
 
-bindsym $mod+t exec ~/scripts/wallpaper_menu.sh
+bindsym $mod+t exec ~/scripts/wallpaper_select.sh
 
 
 
@@ -302,5 +303,3 @@ bindsym $mod+t exec ~/scripts/wallpaper_menu.sh
 #assign [class="Brave"] $ws3
 #assign [class="qutebrowser"] $ws3
 #assign [class="discord"] $ws1
-
-

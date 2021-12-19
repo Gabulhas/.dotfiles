@@ -1,3 +1,4 @@
+nmap <silent> =G :Neoformat<CR>
 " set tabs to have 4 spaces
 set ts=4
 
