@@ -17,5 +17,5 @@ Website: https://github.com/brainfucksec/neovim-lua
 -- Import Lua modules
 -----------------------------------------------------------
 require('settings')
-require('keymaps')
 require('plugins')
+require('keymaps')
