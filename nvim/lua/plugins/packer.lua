@@ -10,8 +10,6 @@ local cmd = vim.cmd
 cmd [[packadd packer.nvim]]
 local packer = require 'packer'
 
-local elixir_types = {'elixir', 'eelixir'}
-
 -- Add packages
 return packer.startup(function()
     use 'wbthomason/packer.nvim' -- packer can manage itself
@@ -31,7 +29,7 @@ return packer.startup(function()
     use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/plenary.nvim'}}}
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
 
-    use {'dylanaraps/wal', as = 'wal'}
+    use {'dylanaraps/wal.vim', as = 'wal'}
     -- use {'AlphaTechnolog/pywal.nvim', as = 'pywal'}
 
     -- treesitter interface
@@ -52,11 +50,7 @@ return packer.startup(function()
     use {
         "folke/zen-mode.nvim",
         config = function()
-            require("zen-mode").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
+            require("zen-mode").setup {width = 120, height = 1}
         end
     }
 
@@ -93,6 +87,9 @@ return packer.startup(function()
 
     -- Gleam
     use {'gleam-lang/gleam.vim', ft = {'gleam'}}
+
+    -- Elixir
+    use {'elixir-editors/vim-elixir', ft = {'elixir', 'eelixir'}}
 
     -- Nim
     use {'alaviss/nim.nvim', ft = {'nim'}}

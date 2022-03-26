@@ -5,6 +5,7 @@
 -- Neovim API aliases
 -----------------------------------------------------------
 -- local map = vim.api.nvim_set_keymap  -- set global keymap local cmd = vim.cmd -- execute Vim commands
+local cmd = vim.cmd
 local exec = vim.api.nvim_exec -- execute Vimscript
 local fn = vim.fn -- call Vim functions
 local g = vim.g -- global variables
@@ -123,3 +124,13 @@ cmd [[
 cmd [[
     set encoding=utf-8
 ]]
+
+-----------------------------------------------------------
+-- Other
+-----------------------------------------------------------
+
+cmd [[
+    au BufNewFile,BufRead *.gl setfiletype scheme
+
+]]
+

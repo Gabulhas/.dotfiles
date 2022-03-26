@@ -53,7 +53,7 @@ local on_attach = function(client, bufnr)
 
 end
 
-local easy_load_servers = {'bashls', 'jedi_language_server', 'clangd', 'html', 'gopls', 'svls', 'texlab', 'ocamllsp', 'elixirls'}
+local easy_load_servers = {'bashls', 'jedi_language_server', 'clangd', 'html', 'gopls', 'svls', 'texlab', 'ocamllsp', 'elixirls', 'rust_analyzer'}
 
 for _, lsp in ipairs(easy_load_servers) do
     nvim_lsp[lsp].setup {on_attach = on_attach, capabilities = capabilities, flags = {debounce_text_changes = 150}}
@@ -63,14 +63,41 @@ end
 -- Lua config
 -----------------------------------------------------------
 
-local luadev = require("lua-dev").setup({})
+-- local luadev = require("lua-dev").setup({})
+-- 
+-- local lspconfig = require('lspconfig')
+-- lspconfig.sumneko_lua.setup(luadev)
 
-local lspconfig = require('lspconfig')
-lspconfig.sumneko_lua.setup(luadev)
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+require'lspconfig'.sumneko_lua.setup {
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+                -- Setup your lua path
+                path = runtime_path
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {'vim'}
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true)
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {enable = false}
+        }
+    }
+}
 
 require"lspconfig".efm.setup {
     init_options = {documentFormatting = true},
-    filetypes = {"lua"},
+    filetypes = {"lua", "python"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
@@ -79,14 +106,17 @@ require"lspconfig".efm.setup {
                     formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-break-after-operator --column-limit=150 --break-after-table-lb",
                     formatStdin = true
                 }
-            }
+            },
+
+            python = {{formatCommand = "autopep8 -", formatStdin = true}}
+
         }
     }
 }
 
 local path_to_elixirls = vim.fn.expand("~/gitdownloads/elixir-ls/release/language_server.sh")
 
-lspconfig.elixirls.setup({
+require"lspconfig".elixirls.setup({
     cmd = {path_to_elixirls},
     capabilities = capabilities,
     on_attach = on_attach,
