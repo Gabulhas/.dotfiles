@@ -7,11 +7,10 @@ let g:opambin = substitute(system('opam var bin'),'\n$','','''')
 " Neoformat
 let g:neoformat_ocaml_ocamlformat = {
   \ 'exe': 'ocamlformat',
-  \ 'args': ['--name', '"%:p"', '-'],
+  \ 'args': ['--enable-outside-detected-project', '--name', '"%:p"', '-'],
   \ 'no_append': 1,
   \ 'stdin': 1,
   \ }
 let g:neoformat_enabled_ocaml = ['ocamlformat']
-nmap <silent> =G :Neoformat<CR>
 map <leader>t :MerlinTypeOf<CR>
 map <leader>s :MerlinTypeOfSel<CR>

@@ -102,14 +102,26 @@ env:
   #multiplier: 3
 
 # Font configuration
+#font:
+#  normal:
+#    family: Misc Termsyn
+#    style: Regular
+#
+#  bold:
+#    family: Misc Termsyn
+#    style: Bold
+
 font:
   normal:
-    family: Misc Termsyn
+    family: Cozette
     style: Regular
 
   bold:
-    family: Misc Termsyn
-    style: Bold
+    family: Cozette
+    style: Regular
+
+
+
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -728,7 +740,7 @@ font:
   #
   #
 key_bindings:
-  - { key: Key0,     mods: Control, action: ResetFontSize                }
-  - { key: Plus,   mods: Control, action: ResetFontSize                }
-  - { key: Minus,    mods: Control, action: ResetFontSize             }
+  - { key: Key0,           mods: Control,                 action: ResetFontSize    }
+  - { key: Plus,           mods: Control,                 action: IncreaseFontSize }
+  - { key: Minus,          mods: Control,                 action: DecreaseFontSize }
   

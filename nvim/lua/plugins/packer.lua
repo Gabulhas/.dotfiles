@@ -13,9 +13,15 @@ local packer = require 'packer'
 -- Add packages
 return packer.startup(function()
     use 'wbthomason/packer.nvim' -- packer can manage itself
+    use 'lewis6991/impatient.nvim'
 
     -- file explorer
-    use 'kyazdani42/nvim-tree.lua'
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = {
+            'kyazdani42/nvim-web-devicons' -- optional, for file icons
+        }
+    }
 
     -- autopair
     use {
@@ -46,14 +52,6 @@ return packer.startup(function()
         requires = {'L3MON4D3/LuaSnip', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip'}
     }
 
-    -- zend mode
-    use {
-        "folke/zen-mode.nvim",
-        config = function()
-            require("zen-mode").setup {width = 120, height = 1}
-        end
-    }
-
     -- completion looks
     use 'glepnir/lspsaga.nvim'
 
@@ -80,7 +78,7 @@ return packer.startup(function()
     use {'fatih/vim-go', run = ':GoUpdateBinaries', ft = {'go'}}
 
     -- LaTeX
-    -- use {'lervag/vimtex', ft = {'tex'}}
+    use {'lervag/vimtex', ft = {'tex'}}
 
     -- Markdown
     use {'npxbr/glow.nvim', run = ':GlowInstall', ft = {'markdown'}}
@@ -93,5 +91,11 @@ return packer.startup(function()
 
     -- Nim
     use {'alaviss/nim.nvim', ft = {'nim'}}
+
+    -- Java
+    use {'mfussenegger/nvim-jdtls', ft = {'java'}}
+
+    -- Rust
+    use 'simrat39/rust-tools.nvim'
 
 end)

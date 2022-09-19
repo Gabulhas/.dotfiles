@@ -37,7 +37,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', '<C-i>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    -- buf_set_keymap('n', '', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -53,10 +53,13 @@ local on_attach = function(client, bufnr)
 
 end
 
-local easy_load_servers = {'bashls', 'jedi_language_server', 'clangd', 'html', 'gopls', 'svls', 'texlab', 'ocamllsp', 'elixirls', 'rust_analyzer'}
+local easy_load_servers = {
+    'bashls', 'jedi_language_server', 'clangd', 'html', 'gopls', 'svls', 'texlab', 'ocamllsp', 'elixirls', 'nimls', 'solc', 'tsserver', 'html'
+}
 
 for _, lsp in ipairs(easy_load_servers) do
-    nvim_lsp[lsp].setup {on_attach = on_attach, capabilities = capabilities, flags = {debounce_text_changes = 150}}
+
+    nvim_lsp[lsp].setup({on_attach = on_attach, capabilities = capabilities, flags = {debounce_text_changes = 150}})
 end
 
 -----------------------------------------------------------
@@ -68,32 +71,32 @@ end
 -- local lspconfig = require('lspconfig')
 -- lspconfig.sumneko_lua.setup(luadev)
 
+-- require"lspconfig".sumneko_lua.setup({
+--    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+--    capabilities = capabilities,
+--    settings = {
+--        Lua = {
+--            runtime = {version = 'LuaJIT', path = vim.split(package.path, ';')},
+--            completion = {enable = true, callSnippet = "Both"},
+--            diagnostics = {enable = true, globals = {'vim', 'describe'}, disable = {"lowercase-global"}},
+--            workspace = {
+--                library = {
+--                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+--                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+--                    [vim.fn.expand('/usr/share/awesome/lib')] = true
+--                },
+--                -- adjust these two values if your performance is not optimal
+--                maxPreload = 2000,
+--                preloadFileSize = 1000
+--            }
+--        }
+--    },
+--    on_attach = on_attach_common
+-- })
+
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-
-require'lspconfig'.sumneko_lua.setup {
-    settings = {
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
-                -- Setup your lua path
-                path = runtime_path
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = {'vim'}
-            },
-            workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true)
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {enable = false}
-        }
-    }
-}
 
 require"lspconfig".efm.setup {
     init_options = {documentFormatting = true},
@@ -133,4 +136,42 @@ require"lspconfig".elixirls.setup({
         }
     }
 })
+
+local rt = require('rust-tools')
+local opts = {
+    -- rust-tools options
+    tools = {autoSetHints = true, inlay_hints = {show_parameter_hints = true, parameter_hints_prefix = "->", other_hints_prefix = ""}},
+
+    -- all the opts to send to nvim-lspconfig
+    -- these override the defaults set by rust-tools.nvim
+    -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+    -- https://rust-analyzer.github.io/manual.html#features
+    server = {
+        settings = {
+            ["rust-analyzer"] = {
+                assist = {importEnforceGranularity = true, importPrefix = "crate"},
+                cargo = {allFeatures = true, {buildScripts = {enable = true}}},
+
+                checkOnSave = {
+                    -- default: `cargo check`
+                    command = "clippy"
+                },
+                imports = {granularity = {group = "module"}, prefix = "self"},
+                cargo = {buildScripts = {enable = true}},
+                procMacro = {enable = true},
+                diagnostics = {disabled = {"macro-error", "unresolved-proc-macro"}}
+            },
+            inlayHints = {lifetimeElisionHints = {enable = true, useParameterNames = true}}
+        },
+        on_attach = function(_, bufnr)
+            -- Hover actions
+            vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>:RustHoverActions<CR>", {noremap = true, silent = true})
+            -- Code action groups
+            vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, {buffer = bufnr})
+        end
+
+    }
+}
+
+rt.setup(opts)
 vim.cmd [[autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)]]

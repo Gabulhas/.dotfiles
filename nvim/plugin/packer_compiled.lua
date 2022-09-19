@@ -44,8 +44,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/guilherme/.cache/nvim/packer_hererocks/2.0.5/share/lua/5.1/?.lua;/home/guilherme/.cache/nvim/packer_hererocks/2.0.5/share/lua/5.1/?/init.lua;/home/guilherme/.cache/nvim/packer_hererocks/2.0.5/lib/luarocks/rocks-5.1/?.lua;/home/guilherme/.cache/nvim/packer_hererocks/2.0.5/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/guilherme/.cache/nvim/packer_hererocks/2.0.5/lib/lua/5.1/?.so"
+local package_path_str = "/home/guilherme/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/guilherme/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/guilherme/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/guilherme/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/guilherme/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -115,6 +115,11 @@ _G.packer_plugins = {
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim",
     url = "https://github.com/neovimhaskell/haskell-vim"
   },
+  ["impatient.nvim"] = {
+    loaded = true,
+    path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/impatient.nvim",
+    url = "https://github.com/lewis6991/impatient.nvim"
+  },
   ["lsp-colors.nvim"] = {
     loaded = true,
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim",
@@ -143,7 +148,7 @@ _G.packer_plugins = {
     url = "https://github.com/alaviss/nim.nvim"
   },
   ["nvim-autopairs"] = {
-    config = { "\27LJ\1\2<\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
+    config = { "\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
     loaded = true,
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
@@ -152,6 +157,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-jdtls"] = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/guilherme/.local/share/nvim/site/pack/packer/opt/nvim-jdtls",
+    url = "https://github.com/mfussenegger/nvim-jdtls"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -168,6 +180,11 @@ _G.packer_plugins = {
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -182,6 +199,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["rust-tools.nvim"] = {
+    loaded = true,
+    path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
+    url = "https://github.com/simrat39/rust-tools.nvim"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
@@ -212,6 +234,13 @@ _G.packer_plugins = {
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-go",
     url = "https://github.com/fatih/vim-go"
   },
+  vimtex = {
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex",
+    url = "https://github.com/lervag/vimtex"
+  },
   ["virtual-types.nvim"] = {
     loaded = true,
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/virtual-types.nvim",
@@ -221,53 +250,54 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/wal",
     url = "https://github.com/dylanaraps/wal.vim"
-  },
-  ["zen-mode.nvim"] = {
-    config = { "\27LJ\1\2N\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\2\nwidth\3x\vheight\3\1\nsetup\rzen-mode\frequire\0" },
-    loaded = true,
-    path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
-    url = "https://github.com/folke/zen-mode.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\1\2<\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
 time([[Config for nvim-autopairs]], false)
--- Config for: zen-mode.nvim
-time([[Config for zen-mode.nvim]], true)
-try_loadstring("\27LJ\1\2N\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\2\nwidth\3x\vheight\3\1\nsetup\rzen-mode\frequire\0", "config", "zen-mode.nvim")
-time([[Config for zen-mode.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType java ++once lua require("packer.load")({'nvim-jdtls'}, { ft = "java" }, _G.packer_plugins)]]
 vim.cmd [[au FileType nim ++once lua require("packer.load")({'nim.nvim'}, { ft = "nim" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'glow.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
-vim.cmd [[au FileType go ++once lua require("packer.load")({'vim-go'}, { ft = "go" }, _G.packer_plugins)]]
-vim.cmd [[au FileType elixir ++once lua require("packer.load")({'vim-elixir'}, { ft = "elixir" }, _G.packer_plugins)]]
-vim.cmd [[au FileType haskell ++once lua require("packer.load")({'haskell-vim'}, { ft = "haskell" }, _G.packer_plugins)]]
 vim.cmd [[au FileType eelixir ++once lua require("packer.load")({'vim-elixir'}, { ft = "eelixir" }, _G.packer_plugins)]]
+vim.cmd [[au FileType tex ++once lua require("packer.load")({'vimtex'}, { ft = "tex" }, _G.packer_plugins)]]
 vim.cmd [[au FileType gleam ++once lua require("packer.load")({'gleam.vim'}, { ft = "gleam" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'glow.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
+vim.cmd [[au FileType elixir ++once lua require("packer.load")({'vim-elixir'}, { ft = "elixir" }, _G.packer_plugins)]]
+vim.cmd [[au FileType go ++once lua require("packer.load")({'vim-go'}, { ft = "go" }, _G.packer_plugins)]]
+vim.cmd [[au FileType haskell ++once lua require("packer.load")({'haskell-vim'}, { ft = "haskell" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]
-time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-go/ftdetect/gofiletype.vim]], true)
-vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-go/ftdetect/gofiletype.vim]]
-time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-go/ftdetect/gofiletype.vim]], false)
-time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], true)
-vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]]
-time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], false)
-time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim/ftdetect/haskell.vim]], true)
-vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim/ftdetect/haskell.vim]]
-time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim/ftdetect/haskell.vim]], false)
 time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/nim.nvim/ftdetect/nim.vim]], true)
 vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/nim.nvim/ftdetect/nim.vim]]
 time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/nim.nvim/ftdetect/nim.vim]], false)
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/cls.vim]], true)
+vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/cls.vim]]
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/cls.vim]], false)
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tex.vim]], true)
+vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tex.vim]]
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tex.vim]], false)
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tikz.vim]], true)
+vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tikz.vim]]
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tikz.vim]], false)
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim/ftdetect/haskell.vim]], true)
+vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim/ftdetect/haskell.vim]]
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim/ftdetect/haskell.vim]], false)
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-go/ftdetect/gofiletype.vim]], true)
+vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-go/ftdetect/gofiletype.vim]]
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-go/ftdetect/gofiletype.vim]], false)
 time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/gleam.vim/ftdetect/gleam.vim]], true)
 vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/gleam.vim/ftdetect/gleam.vim]]
 time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/gleam.vim/ftdetect/gleam.vim]], false)
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], true)
+vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]]
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
