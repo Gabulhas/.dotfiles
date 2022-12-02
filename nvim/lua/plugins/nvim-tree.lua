@@ -7,3 +7,5 @@ require("nvim-tree").setup({
     renderer = {group_empty = true},
     filters = {dotfiles = true}
 })
+
+ vim.cmd([[hi NvimTreeWinSeparator ctermbg=7 ctermfg=7]])

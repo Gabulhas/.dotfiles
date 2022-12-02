@@ -21,11 +21,17 @@ g.pumheight = 10
 g.exrc = true
 g.secure = true
 g.pumheight = 10
+g.mousescroll = 0
+g.mouse = ''
+exec([[
+    set mouse=
+]], false)
 
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
 opt.number = true -- show line number
+opt.relativenumber = true
 opt.showmatch = true -- highlight matching parenthesis
 opt.splitright = true -- vertical split to the right
 opt.splitbelow = true -- orizontal split to the bottom

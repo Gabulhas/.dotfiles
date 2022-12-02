@@ -11,10 +11,9 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-env:
-    TERM: xterm-256color
-    WINIT_HIDPI_FACTOR: "1.5"
-    WINIT_X11_SCALE_FACTOR: "1"
+#env:
+#    TERM: xterm-256color
+#WINIT_X11_SCALE_FACTOR: "1"
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
@@ -112,23 +111,25 @@ env:
 #    style: Bold
 
 font:
+  size: 6
   normal:
     family: Cozette
     style: Regular
 
   bold:
     family: Cozette
-    style: Regular
+    style: bold
 
-
-
+  italic:
+    family: Cozette
+    style: italic
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
-  #offset:
-  #  x: 0
-  #  y: 0
+  # offset:
+  #   x: -1
+  #   y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the
@@ -348,10 +349,10 @@ font:
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
-#shell:
-#  program: /bin/bash
-#  args:
-#    - --login
+shell:
+  program: /bin/fish
+  args:
+    - --login
 
 # Startup directory
 #

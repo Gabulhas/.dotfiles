@@ -10,6 +10,7 @@ local cmd = vim.cmd
 cmd [[packadd packer.nvim]]
 local packer = require 'packer'
 
+
 -- Add packages
 return packer.startup(function()
     use 'wbthomason/packer.nvim' -- packer can manage itself
@@ -35,16 +36,24 @@ return packer.startup(function()
     use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/plenary.nvim'}}}
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
 
-    use {'dylanaraps/wal.vim', as = 'wal'}
+    use {'Gabulhas/wal.vim', as = 'wal'}
     -- use {'AlphaTechnolog/pywal.nvim', as = 'pywal'}
 
     -- treesitter interface
-    use 'nvim-treesitter/nvim-treesitter'
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function()
+            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            ts_update()
+        end,
+    }
 
     use 'nvim-treesitter/playground'
 
     -- LSP
     use 'neovim/nvim-lspconfig'
+    use 'jose-elias-alvarez/null-ls.nvim'
+    use 'MunifTanjim/prettier.nvim'
 
     -- autocomplete
     use {
@@ -52,10 +61,10 @@ return packer.startup(function()
         requires = {'L3MON4D3/LuaSnip', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip'}
     }
 
+
     -- completion looks
     use 'glepnir/lspsaga.nvim'
 
-    -- this replaces baba_de_camelo :(
     use 'jubnzv/virtual-types.nvim'
 
     use {'sbdchd/neoformat'}
@@ -64,12 +73,13 @@ return packer.startup(function()
 
     use 'folke/lsp-colors.nvim'
 
+    use 'simrat39/symbols-outline.nvim'
+
+    use 'ray-x/lsp_signature.nvim'
+
     -----------------------------------------------------------
     -- Language Specific Plugins
     -----------------------------------------------------------
-
-    -- Lua
-    use "folke/lua-dev.nvim"
 
     -- Haskell
     use {'neovimhaskell/haskell-vim', ft = {'haskell'}}

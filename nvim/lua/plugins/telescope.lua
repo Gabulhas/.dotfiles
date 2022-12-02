@@ -1,4 +1,14 @@
+local actions = require("telescope.actions")
+
 require('telescope').setup {
+    defaults = {
+        mappings = {
+            i = {
+                ["<C-s>"] = actions.file_split,
+            }
+        }
+
+    },
     extensions = {
         fzf = {
             fuzzy = true, -- false will only do exact matching
