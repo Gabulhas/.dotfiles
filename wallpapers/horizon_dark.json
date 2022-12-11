@@ -1,0 +1,27 @@
+{
+  "wallpaper": "/home/guilherme/.config/wallpapers/horizon.jpg",
+  "special": {
+    "foreground": "#e0e0e0",
+    "background": "#1c1e26",
+    "cursor": "#e0e0e0"
+  },
+  "colors": {
+    "color0": "#16161c",
+    "color1": "#e95678",
+    "color2": "#29d398",
+    "color3": "#fab795",
+    "color4": "#26bbd9",
+    "color5": "#ee64ac",
+    "color6": "#59e1e3",
+    "color7": "#d5d8da",
+    "color8": "#5b5858",
+    "color9": "#ec6a88",
+    "color10": "#3fdaa4",
+    "color11": "#fbc3a7",
+    "color12": "#3fc4de",
+    "color13": "#f075b5",
+    "color14": "#6be4e6",
+    "color15": "#d5d8da"
+  }
+}
+
