@@ -200,8 +200,8 @@ bindsym $mod+Shift+x sticky toggle
 
 # bindsym 
 
-gaps inner 15
-gaps outer 15
+gaps inner 0
+gaps outer 0
 for_window [class="^.*"] border pixel 3
 
 set $mode_gaps_toggle Toggle WORKSPACE gaps: (1) on (0) off | Toggle ALL gaps: (9) on (2) off

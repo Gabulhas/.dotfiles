@@ -130,15 +130,15 @@ _G.packer_plugins = {
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim",
     url = "https://github.com/folke/lsp-colors.nvim"
   },
+  ["lsp_signature.nvim"] = {
+    loaded = true,
+    path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
+    url = "https://github.com/ray-x/lsp_signature.nvim"
+  },
   ["lspsaga.nvim"] = {
     loaded = true,
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
     url = "https://github.com/glepnir/lspsaga.nvim"
-  },
-  ["lua-dev.nvim"] = {
-    loaded = true,
-    path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/lua-dev.nvim",
-    url = "https://github.com/folke/lua-dev.nvim"
   },
   neoformat = {
     loaded = true,
@@ -151,6 +151,11 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/opt/nim.nvim",
     url = "https://github.com/alaviss/nim.nvim"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-autopairs"] = {
     config = { "\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
@@ -205,10 +210,20 @@ _G.packer_plugins = {
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["prettier.nvim"] = {
+    loaded = true,
+    path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/prettier.nvim",
+    url = "https://github.com/MunifTanjim/prettier.nvim"
+  },
   ["rust-tools.nvim"] = {
     loaded = true,
     path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/rust-tools.nvim",
     url = "https://github.com/simrat39/rust-tools.nvim"
+  },
+  ["symbols-outline.nvim"] = {
+    loaded = true,
+    path = "/home/guilherme/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
+    url = "https://github.com/simrat39/symbols-outline.nvim"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
@@ -267,30 +282,27 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType eelixir ++once lua require("packer.load")({'vim-elixir'}, { ft = "eelixir" }, _G.packer_plugins)]]
-vim.cmd [[au FileType go ++once lua require("packer.load")({'vim-go'}, { ft = "go" }, _G.packer_plugins)]]
-vim.cmd [[au FileType gleam ++once lua require("packer.load")({'gleam.vim'}, { ft = "gleam" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'glow.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType tex ++once lua require("packer.load")({'vimtex'}, { ft = "tex" }, _G.packer_plugins)]]
-vim.cmd [[au FileType haskell ++once lua require("packer.load")({'haskell-vim'}, { ft = "haskell" }, _G.packer_plugins)]]
 vim.cmd [[au FileType java ++once lua require("packer.load")({'nvim-jdtls'}, { ft = "java" }, _G.packer_plugins)]]
+vim.cmd [[au FileType haskell ++once lua require("packer.load")({'haskell-vim'}, { ft = "haskell" }, _G.packer_plugins)]]
 vim.cmd [[au FileType nim ++once lua require("packer.load")({'nim.nvim'}, { ft = "nim" }, _G.packer_plugins)]]
 vim.cmd [[au FileType elixir ++once lua require("packer.load")({'vim-elixir'}, { ft = "elixir" }, _G.packer_plugins)]]
+vim.cmd [[au FileType eelixir ++once lua require("packer.load")({'vim-elixir'}, { ft = "eelixir" }, _G.packer_plugins)]]
+vim.cmd [[au FileType gleam ++once lua require("packer.load")({'gleam.vim'}, { ft = "gleam" }, _G.packer_plugins)]]
+vim.cmd [[au FileType go ++once lua require("packer.load")({'vim-go'}, { ft = "go" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'glow.nvim'}, { ft = "markdown" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]
-time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/nim.nvim/ftdetect/nim.vim]], true)
-vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/nim.nvim/ftdetect/nim.vim]]
-time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/nim.nvim/ftdetect/nim.vim]], false)
-time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim/ftdetect/haskell.vim]], true)
-vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim/ftdetect/haskell.vim]]
-time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim/ftdetect/haskell.vim]], false)
 time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-go/ftdetect/gofiletype.vim]], true)
 vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-go/ftdetect/gofiletype.vim]]
 time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-go/ftdetect/gofiletype.vim]], false)
 time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], true)
 vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]]
 time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vim-elixir/ftdetect/elixir.vim]], false)
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim/ftdetect/haskell.vim]], true)
+vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim/ftdetect/haskell.vim]]
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/haskell-vim/ftdetect/haskell.vim]], false)
 time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/gleam.vim/ftdetect/gleam.vim]], true)
 vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/gleam.vim/ftdetect/gleam.vim]]
 time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/gleam.vim/ftdetect/gleam.vim]], false)
@@ -303,6 +315,9 @@ time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/
 time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tikz.vim]], true)
 vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tikz.vim]]
 time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/vimtex/ftdetect/tikz.vim]], false)
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/nim.nvim/ftdetect/nim.vim]], true)
+vim.cmd [[source /home/guilherme/.local/share/nvim/site/pack/packer/opt/nim.nvim/ftdetect/nim.vim]]
+time([[Sourcing ftdetect script at: /home/guilherme/.local/share/nvim/site/pack/packer/opt/nim.nvim/ftdetect/nim.vim]], false)
 vim.cmd("augroup END")
 
 _G._packer.inside_compile = false

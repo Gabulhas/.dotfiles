@@ -19,27 +19,19 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {properties
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 
-
 vim.cmd [[autocmd! ColorScheme * highlight NormalFloat ctermbg=NONE ctermfg=7]]
 vim.cmd [[autocmd! ColorScheme * highlight FloatBorder ctermbg=NONE ctermfg=7]]
 
 local border = {
-      {"┏", "FloatBorder"},
-      {"━", "FloatBorder"},
-      {"┓", "FloatBorder"},
-      {"┃", "FloatBorder"},
-      {"┛", "FloatBorder"},
-      {"━", "FloatBorder"},
-      {"┗", "FloatBorder"},
-      {"┃", "FloatBorder"},
+    {"┏", "FloatBorder"}, {"━", "FloatBorder"}, {"┓", "FloatBorder"}, {"┃", "FloatBorder"}, {"┛", "FloatBorder"}, {"━", "FloatBorder"},
+    {"┗", "FloatBorder"}, {"┃", "FloatBorder"}
 }
 
 -- LSP settings (for overriding per client)
-local handlers =  {
-  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
-  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+local handlers = {
+    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = border})
 }
-
 
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...)
@@ -47,6 +39,11 @@ local on_attach = function(client, bufnr)
     end
     local function buf_set_option(...)
         vim.api.nvim_buf_set_option(bufnr, ...)
+    end
+    local nmap = function(keys, func, desc)
+        if desc then desc = 'LSP: ' .. desc end
+
+        vim.keymap.set('n', keys, func, {buffer = bufnr, desc = desc})
     end
 
     -- Enable completion triggered by <c-x><c-o>
@@ -60,7 +57,6 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('n', 'gK', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
@@ -74,15 +70,18 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
     buf_set_keymap('n', '<space>lf', '<cmd>lua vim.lsp.buf.format { async = true }<CR>', opts)
 
+    nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+    nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+    nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 end
 
 local easy_load_servers = {
-    'bashls', 'jedi_language_server', 'clangd', 'html', 'gopls', 'svls', 'texlab', 'ocamllsp', 'elixirls', 'nimls', 'solc', 'tsserver', 'html'
+    'bashls', 'jedi_language_server', 'clangd', 'html', 'gopls', 'svls', 'texlab', 'ocamllsp', 'elixirls', 'nimls', 'solc', 'tsserver', 'html', 'hls'
 }
 
 for _, lsp in ipairs(easy_load_servers) do
 
-    nvim_lsp[lsp].setup({on_attach = on_attach, capabilities = capabilities, flags = {debounce_text_changes = 150}, handlers=handlers})
+    nvim_lsp[lsp].setup({on_attach = on_attach, capabilities = capabilities, flags = {debounce_text_changes = 150}, handlers = handlers})
 end
 
 -----------------------------------------------------------
@@ -112,7 +111,7 @@ require"lspconfig".efm.setup {
     }
 }
 
-local path_to_elixirls = vim.fn.expand("~/gitdownloads/elixir-ls/release/language_server.sh")
+local path_to_elixirls = vim.fn.expand("/home/guilherme/.config/elixir_ls/language_server.sh")
 
 require"lspconfig".elixirls.setup({
     cmd = {path_to_elixirls},
