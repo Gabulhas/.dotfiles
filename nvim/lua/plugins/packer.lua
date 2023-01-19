@@ -10,7 +10,6 @@ local cmd = vim.cmd
 cmd [[packadd packer.nvim]]
 local packer = require 'packer'
 
-
 -- Add packages
 return packer.startup(function()
     use 'wbthomason/packer.nvim' -- packer can manage itself
@@ -43,9 +42,9 @@ return packer.startup(function()
     use {
         'nvim-treesitter/nvim-treesitter',
         run = function()
-            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            local ts_update = require('nvim-treesitter.install').update({with_sync = true})
             ts_update()
-        end,
+        end
     }
 
     use 'nvim-treesitter/playground'
@@ -54,13 +53,23 @@ return packer.startup(function()
     use 'neovim/nvim-lspconfig'
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'MunifTanjim/prettier.nvim'
+    use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+            require("trouble").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    }
 
     -- autocomplete
     use {
         'hrsh7th/nvim-cmp',
         requires = {'L3MON4D3/LuaSnip', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer', 'saadparwaiz1/cmp_luasnip'}
     }
-
 
     -- completion looks
     use 'glepnir/lspsaga.nvim'
@@ -77,6 +86,10 @@ return packer.startup(function()
 
     use 'ray-x/lsp_signature.nvim'
 
+    -- DAP
+    use 'mfussenegger/nvim-dap'
+    use {"rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"}}
+
     -----------------------------------------------------------
     -- Language Specific Plugins
     -----------------------------------------------------------
@@ -86,6 +99,7 @@ return packer.startup(function()
 
     -- Golang
     use {'fatih/vim-go', run = ':GoUpdateBinaries', ft = {'go'}}
+    use {'leoluz/nvim-dap-go', ft = {'go'}} -- Install the plugin with Packer
 
     -- LaTeX
     use {'lervag/vimtex', ft = {'tex'}}
