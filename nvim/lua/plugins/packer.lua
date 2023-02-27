@@ -37,6 +37,14 @@ return packer.startup(function()
 
     use {'Gabulhas/wal.vim', as = 'wal'}
     -- use {'AlphaTechnolog/pywal.nvim', as = 'pywal'}
+    -- use({
+    --     "sainnhe/everforest",
+    --     -- Optional; default configuration will be used if setup isn't called.
+    --     config = function()
+    --         vim.cmd([[colorscheme everforest]])
+
+    --     end
+    -- })
 
     -- treesitter interface
     use {
@@ -46,8 +54,6 @@ return packer.startup(function()
             ts_update()
         end
     }
-
-    use 'nvim-treesitter/playground'
 
     -- LSP
     use 'neovim/nvim-lspconfig'
@@ -121,5 +127,8 @@ return packer.startup(function()
 
     -- Rust
     use 'simrat39/rust-tools.nvim'
+
+    -- Other
+    use {'pest-parser/pest.vim'}
 
 end)

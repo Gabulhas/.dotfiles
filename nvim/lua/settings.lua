@@ -27,6 +27,10 @@ exec([[
     set mouse=
 ]], false)
 
+cmd [[
+set clipboard=unnamedplus
+]]
+
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
@@ -39,14 +43,6 @@ opt.ignorecase = true -- ignore case letters when search
 opt.smartcase = true -- ignore lowercase for the whole pattern
 opt.linebreak = true -- wrap on word boundary
 opt.scrolloff = 12
-
--- highlight on yank
-exec([[
-  augroup YankHighlight
-    autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=200}
-  augroup end
-]], false)
 
 -----------------------------------------------------------
 -- Memory, CPU
@@ -137,6 +133,5 @@ cmd [[
 
 cmd [[
     au BufNewFile,BufRead *.gl setfiletype scheme
-
 ]]
 
