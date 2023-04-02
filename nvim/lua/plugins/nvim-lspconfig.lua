@@ -5,6 +5,10 @@
 -- for language server setup see: https://github.com/neovim/nvim-lspconfig
 local nvim_lsp = require 'lspconfig'
 
+local easy_load_servers = {
+    'bashls', 'jedi_language_server', 'clangd', 'html', 'gopls', 'svls', 'texlab', 'ocamllsp', 'elixirls', 'nimls', 'solc', 'tsserver', 'html', 'hls', 'lua_ls'
+}
+
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.documentationFormat = {'markdown', 'plaintext'}
@@ -76,10 +80,6 @@ local on_attach = function(client, bufnr)
     nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 end
 
-local easy_load_servers = {
-    'bashls', 'jedi_language_server', 'clangd', 'html', 'gopls', 'svls', 'texlab', 'ocamllsp', 'elixirls', 'nimls', 'solc', 'tsserver', 'html', 'hls'
-}
-
 for _, lsp in ipairs(easy_load_servers) do
 
     nvim_lsp[lsp].setup({on_attach = on_attach, capabilities = capabilities, flags = {debounce_text_changes = 150}, handlers = handlers})
@@ -95,7 +95,7 @@ table.insert(runtime_path, "lua/?/init.lua")
 
 require"lspconfig".efm.setup {
     init_options = {documentFormatting = true},
-    filetypes = {"lua", "python"},
+    filetypes = {"python"},
     settings = {
         rootMarkers = {".git/"},
         languages = {
