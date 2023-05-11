@@ -4,11 +4,10 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup({
     sources = {
-        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.formatting.eslint,
         null_ls.builtins.completion.spell,
-        null_ls.builtins.formatting.ocamlformat,        
-        null_ls.builtins.formatting.rustfmt,        
-
+        null_ls.builtins.formatting.ocamlformat,
+        null_ls.builtins.formatting.rustfmt
     },
     debug = true,
 

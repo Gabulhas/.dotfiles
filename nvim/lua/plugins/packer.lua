@@ -131,4 +131,8 @@ return packer.startup(function()
     -- Other
     use {'pest-parser/pest.vim'}
 
+    -- Don't look
+    use("MunifTanjim/nui.nvim")
+    use("dpayne/CodeGPT.nvim")
+
 end)
