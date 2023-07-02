@@ -1,4 +1,6 @@
 require('plugins/packer')
+
+
 require('plugins/neoformat')
 require('plugins/nvim-cmp')
 require('plugins/nvim-lspconfig')
@@ -12,3 +14,4 @@ require('plugins/null-ls')
 require('plugins/prettier')
 require('plugins/symbols-outline')
 require('plugins/lsp_signature')
+require('plugins/lualine')

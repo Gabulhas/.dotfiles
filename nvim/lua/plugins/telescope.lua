@@ -1,6 +1,9 @@
 local actions = require("telescope.actions")
 
-require('telescope').setup {
+local telescope = require("telescope")
+local telescope_builtin = require("telescope.builtin")
+
+telescope.setup {
     defaults = {
         mappings = {
             i = {
@@ -21,4 +24,19 @@ require('telescope').setup {
 }
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
-require('telescope').load_extension('fzf')
+telescope.load_extension('fzf')
+telescope.load_extension("advanced_git_search")
+
+
+
+vim.keymap.set('n', '<leader>ff', [[<cmd>Telescope find_files <cr>]],   {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>fg', [[<cmd>Telescope live_grep <cr>]],    {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>fb', [[<cmd>Telescope buffers <cr>]],      {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>fh', [[<cmd>Telescope help_tags <cr>]],    {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>sf',       telescope_builtin.find_files, {desc = '[S]earch [F]iles'})
+vim.keymap.set('n', '<leader>sh',       telescope_builtin.help_tags, {desc = '[S]earch [H]elp'})
+vim.keymap.set('n', '<leader>sw',       telescope_builtin.grep_string, {desc = '[S]earch current [W]ord'})
+vim.keymap.set('n', '<leader>sd',       telescope_builtin.diagnostics, {desc = '[S]earch [D]iagnostics'})
+vim.keymap.set('n', '<leader><space>',  telescope_builtin.buffers, {desc = '[ ] Find existing buffers'})
+
+

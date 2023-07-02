@@ -55,7 +55,7 @@ opt.synmaxcol = 240 -- max column for syntax highlight
 -----------------------------------------------------------
 -- Colorscheme
 -----------------------------------------------------------
-cmd [[colorscheme wal]]
+cmd [[colorscheme pywal16]]
 cmd [[highlight MatchParen ctermfg=white ctermbg=green cterm=NONE]]
 
 -----------------------------------------------------------

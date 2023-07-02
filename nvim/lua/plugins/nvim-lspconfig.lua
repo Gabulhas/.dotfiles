@@ -6,7 +6,7 @@
 local nvim_lsp = require 'lspconfig'
 
 local easy_load_servers = {
-    'bashls', 'jedi_language_server', 'clangd', 'html', 'gopls', 'svls', 'texlab', 'ocamllsp', 'elixirls', 'nimls', 'solc', 'tsserver', 'html', 'hls', 'lua_ls'
+    'bashls', 'jedi_language_server', 'clangd', 'html', 'gopls', 'svls', 'texlab', 'ocamllsp', 'elixirls', 'nimls', 'tsserver', 'html', 'hls', 'lua_ls', 'solidity'
 }
 
 -- Add additional capabilities supported by nvim-cmp
@@ -93,6 +93,7 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
+--- EFM START ---
 require"lspconfig".efm.setup {
     init_options = {documentFormatting = true},
     filetypes = {"python"},
@@ -111,7 +112,9 @@ require"lspconfig".efm.setup {
         }
     }
 }
+--- EFM END ---
 
+--- Elixir START ---
 local path_to_elixirls = vim.fn.expand("/home/guilherme/.config/elixir_ls/language_server.sh")
 
 require"lspconfig".elixirls.setup({
@@ -131,7 +134,9 @@ require"lspconfig".elixirls.setup({
         }
     }
 })
+--- Elixir END ---
 
+--- Rust START ---
 local rt = require('rust-tools')
 local opts = {
     -- rust-tools options
@@ -169,4 +174,61 @@ local opts = {
 }
 
 rt.setup(opts)
-vim.cmd [[autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)]]
+--- Rust END ---
+
+--- Solidity START ---
+--require"lspconfig".solidity.setup({
+--    cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
+--    filetypes = { 'solidity' },
+--    root_dir = require("lspconfig.util").find_git_ancestor,
+--    single_file_support = true,
+--    capabilities = capabilities,
+--    on_attach = on_attach,
+--})
+
+require'lspconfig'.omnisharp.setup {
+    cmd = { "dotnet", "/usr/lib/omnisharp-roslyn/OmniSharp.dll" },
+
+    -- Enables support for reading code style, naming convention and analyzer
+    -- settings from .editorconfig.
+    enable_editorconfig_support = true,
+
+    -- If true, MSBuild project system will only load projects for files that
+    -- were opened in the editor. This setting is useful for big C# codebases
+    -- and allows for faster initialization of code navigation features only
+    -- for projects that are relevant to code that is being edited. With this
+    -- setting enabled OmniSharp may load fewer projects and may thus display
+    -- incomplete reference lists for symbols.
+    enable_ms_build_load_projects_on_demand = false,
+
+    -- Enables support for roslyn analyzers, code fixes and rulesets.
+    enable_roslyn_analyzers = false,
+
+    -- Specifies whether 'using' directives should be grouped and sorted during
+    -- document formatting.
+    organize_imports_on_format = false,
+
+    -- Enables support for showing unimported types and unimported extension
+    -- methods in completion lists. When committed, the appropriate using
+    -- directive will be added at the top of the current file. This option can
+    -- have a negative impact on initial completion responsiveness,
+    -- particularly for the first few completion sessions after opening a
+    -- solution.
+    enable_import_completion = false,
+
+    -- Specifies whether to include preview versions of the .NET SDK when
+    -- determining which version to use for project loading.
+    sdk_include_prereleases = true,
+
+    -- Only run analyzers against open files when 'enableRoslynAnalyzers' is
+    -- true
+    analyze_open_documents_only = false,
+    on_attach = on_attach, capabilities = capabilities, flags = {debounce_text_changes = 150}, handlers = handlers
+}
+
+
+
+
+
+--- Solidity END ---
+-- vim.cmd [[autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)]]

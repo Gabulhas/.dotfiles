@@ -9,6 +9,6 @@ packer.init({
 })
 --- startup and add configure plugins
 require('settings')
-require('impatient')
+--require('impatient')
 require('plugins')
 require('keymaps')

@@ -35,16 +35,24 @@ return packer.startup(function()
     use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/plenary.nvim'}}}
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
 
-    use {'Gabulhas/wal.vim', as = 'wal'}
-    -- use {'AlphaTechnolog/pywal.nvim', as = 'pywal'}
-    -- use({
-    --     "sainnhe/everforest",
-    --     -- Optional; default configuration will be used if setup isn't called.
-    --     config = function()
-    --         vim.cmd([[colorscheme everforest]])
 
-    --     end
+    use { "aaronhallaert/advanced-git-search.nvim" }
+    use {"lewis6991/gitsigns.nvim", run=require('gitsigns').setup()}
+
+    -- use({
+	--     "oncomouse/lushwal",
+	--     requires = { { "rktjmp/lush.nvim", opt = true }, { "rktjmp/shipwright.nvim", opt = true } },
     -- })
+
+    -- use {'Gabulhas/wal.vim', as = 'wal'}
+
+    use { '/home/guilherme/gitdownloads/pywal16.nvim', as = 'pywal16'}
+
+
+    use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
 
     -- treesitter interface
     use {
