@@ -138,9 +138,9 @@ return packer.startup(function()
 
     -- Other
     use {'pest-parser/pest.vim'}
+    use 'rvmelkonian/move.vim'
+    use 'Hoffs/omnisharp-extended-lsp.nvim'
 
-    -- Don't look
-    use("MunifTanjim/nui.nvim")
-    use("dpayne/CodeGPT.nvim")
+
 
 end)

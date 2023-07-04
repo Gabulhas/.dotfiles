@@ -2,7 +2,7 @@
 -- Autocomplete configuration file
 -----------------------------------------------------------
 -- Plugin: nvim-cmp
--- https://github.com/hrsh7th/nvim-cmpa
+-- https://github.com/hrsh7th/nvim-cmpa 
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 
