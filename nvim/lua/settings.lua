@@ -20,7 +20,6 @@ g.ttyfast = true
 g.pumheight = 10
 g.exrc = true
 g.secure = true
-g.pumheight = 10
 g.mousescroll = 0
 g.mouse = ''
 exec([[
@@ -111,8 +110,10 @@ cmd [[
 -----------------------------------------------------------
 -- disable builtins plugins
 local disabled_built_ins = {
-    "netrw", "netrwPlugin", "netrwSettings", "netrwFileHandlers", "gzip", "zip", "zipPlugin", "tar", "tarPlugin", "getscript", "getscriptPlugin",
-    "vimball", "vimballPlugin", "2html_plugin", "logipat", "rrhelper", "spellfile_plugin", "matchit"
+    "netrw", "netrwPlugin", "netrwSettings", "netrwFileHandlers", "gzip", "zip",
+    "zipPlugin", "tar", "tarPlugin", "getscript", "getscriptPlugin", "vimball",
+    "vimballPlugin", "2html_plugin", "logipat", "rrhelper", "spellfile_plugin",
+    "matchit"
 }
 
 for _, plugin in pairs(disabled_built_ins) do g["loaded_" .. plugin] = 1 end
@@ -135,3 +136,6 @@ cmd [[
     au BufNewFile,BufRead *.gl setfiletype scheme
 ]]
 
+cmd [[
+    let $FISH_IN_NEOVIM = v:servername
+]]

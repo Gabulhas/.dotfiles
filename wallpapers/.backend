@@ -2,19 +2,25 @@ city.jpg:schemer2
 coffee.png:schemer2
 rose.png:haishoku,colorz
 spyro.png:schemer2
+quinta.jpg:schemer2
+bib_portuguesa.jpg:schemer2
+bib_outra.jpg:schemer2
 
-everforest.json
+aura.json
+catppuccin-latte.json
+catppuccin-macchiato.json
+catppuccin-mocha.json
 everblush.json
+everforest.json
 gruvboxmaterial.json
 horizon_dark.json
 lovelace.json
 oceanic.json
-xcode_dark.json
-catppuccin-latte.json
-catppuccin-macchiato.json
-catppuccin-mocha.json
 oxocarbon.json
-aura.json
+rose-pine-dawn.json
+rose-pine-moon.json
+rose-pine.json
+xcode_dark.json
 
 base16-3024
 base16-atelier-cave
