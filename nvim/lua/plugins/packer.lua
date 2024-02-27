@@ -1,10 +1,11 @@
 local cmd = vim.cmd
+
 cmd [[packadd packer.nvim]]
 local packer = require 'packer'
 
 vim.loader.enable()
 -- Add packages
-return packer.startup(function()
+return packer.startup(function(use)
     use 'wbthomason/packer.nvim' -- packer can manage itself
 
     -- file explorer
@@ -36,12 +37,13 @@ return packer.startup(function()
     use {"aaronhallaert/advanced-git-search.nvim"}
     use {"lewis6991/gitsigns.nvim", run = require('gitsigns').setup()}
 
-    -- use({
-    --     "oncomouse/lushwal",
-    --     requires = { { "rktjmp/lush.nvim", opt = true }, { "rktjmp/shipwright.nvim", opt = true } },
-    -- })
-
-    -- use {'Gabulhas/wal.vim', as = 'wal'}
+    use {
+        'pwntester/octo.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim',
+            'nvim-tree/nvim-web-devicons'
+        }
+    }
 
     use {'/home/guilherme/gitdownloads/pywal16.nvim', as = 'pywal16'}
 
