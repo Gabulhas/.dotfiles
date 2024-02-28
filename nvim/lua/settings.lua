@@ -54,8 +54,8 @@ opt.synmaxcol = 240 -- max column for syntax highlight
 -----------------------------------------------------------
 -- Colorscheme
 -----------------------------------------------------------
--- cmd [[colorscheme pywal16]]
-cmd [[highlight MatchParen ctermfg=white ctermbg=green cterm=NONE]]
+-- cmd [[colorscheme mbc]]
+-- cmd [[highlight MatchParen ctermfg=white ctermbg=green cterm=NONE]]
 
 -----------------------------------------------------------
 -- Tabs, indent

@@ -1,6 +1,6 @@
 require('lualine').setup {
     options = {
-        theme = "mbc",
+        theme = "pywal",
         icons_enabled = true,
         component_separators = {left = '', right = ''},
         section_separators = {left = '', right = ''},

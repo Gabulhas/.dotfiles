@@ -1,7 +1,5 @@
 local cmd = vim.cmd
 
-vim.loader.enable()
-
 local prettier_files = {
     "css", "graphql", "html", "javascript", "javascriptreact", "json", "less",
     "markdown", "scss", "typescript", "typescriptreact", "yaml"
@@ -14,7 +12,7 @@ require("lazy").setup({
     {
         'kyazdani42/nvim-tree.lua',
         dependencies = {
-            'kyazdani42/nvim-web-devicons' -- optional, for file icons
+            'nvim-tree/nvim-web-devicons' -- optional, for file icons
         }
     }, -- autopair
     {
@@ -29,8 +27,10 @@ require("lazy").setup({
         dependencies = {
             "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"
         }
-    }, {"aaronhallaert/advanced-git-search.nvim"},
-    {"lewis6991/gitsigns.nvim", build = require('gitsigns').setup()}, {
+    }, {"aaronhallaert/advanced-git-search.nvim"}, {
+        "lewis6991/gitsigns.nvim",
+        config = function() require('gitsigns').setup() end
+    }, {
         'pwntester/octo.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim',
@@ -49,12 +49,20 @@ require("lazy").setup({
         'nvim-lualine/lualine.nvim',
         dependencies = {'nvim-tree/nvim-web-devicons', lazy = true}
     }, {
-        'nvim-treesitter/nvim-treesitter',
-        build = function()
-            local ts_update = require('nvim-treesitter.install').update({
-                with_sync = true
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function()
+            local configs = require("nvim-treesitter.configs")
+
+            configs.setup({
+                ensure_installed = {
+                    "c", "lua", "vim", "vimdoc", "query", "elixir", "heex",
+                    "javascript", "html"
+                },
+                sync_install = false,
+                highlight = {enable = true},
+                indent = {enable = true}
             })
-            ts_update()
         end
     }, -- LSP
     {'neovim/nvim-lspconfig'}, {'jose-elias-alvarez/null-ls.nvim'}, {
@@ -94,12 +102,7 @@ require("lazy").setup({
         build = ':lua require("go.install").update_all_sync()'
     }, -- LaTeX
     {'lervag/vimtex', ft = {'tex'}}, -- Markdown
-    {'npxbr/glow.nvim', build = ':GlowInstall', ft = {'markdown'}}, -- Elixir
-    {
-        "elixir-tools/elixir-tools.nvim",
-        version = "stable",
-        dependencies = {"nvim-lua/plenary.nvim"}
-    }, -- Nim
+    -- Nim
     {'alaviss/nim.nvim', ft = 'nim'}, -- Java
     {'mfussenegger/nvim-jdtls', ft = 'java'}, -- Rust
     {'simrat39/rust-tools.nvim'}, -- javascript and all that cringe stuff

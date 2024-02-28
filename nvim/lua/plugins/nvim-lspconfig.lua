@@ -211,14 +211,15 @@ local opts = {
                 diagnostics = {
                     disabled = {"macro-error", "unresolved-proc-macro"}
                 }
-            },
-            inlayHints = {
-                lifetimeElisionHints = {enable = true, useParameterNames = true}
             }
+            --            inlayHints = {
+            --                lifetimeElisionHints = {enable = true, useParameterNames = true}
+            --            }
         },
         on_attach = function(client, bufnr)
             -- Hover actions
             on_attach(client, bufnr)
+            client.server_capabilities.semanticTokensProvider = nil
             vim.api.nvim_buf_set_keymap(bufnr, "n", "K",
                                         "<cmd>:RustHoverActions<CR>",
                                         {noremap = true, silent = true})
