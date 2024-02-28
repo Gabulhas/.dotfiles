@@ -1,14 +1,15 @@
-local vim = vim
-local execute = vim.api.nvim_command
-local fn = vim.fn
-vim.cmd('packadd packer.nvim')
-local packer = require'packer'
-local util = require'packer.util'
-packer.init({
-  package_root = util.join_paths(vim.fn.stdpath('data'), 'site', 'pack')
-})
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git", "clone", "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git", "--branch=stable", -- latest stable release
+        lazypath
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+
 --- startup and add configure plugins
 require('settings')
---require('impatient')
+-- require('impatient')
 require('plugins')
 require('keymaps')

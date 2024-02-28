@@ -1,12 +1,11 @@
 require('lualine').setup {
     options = {
+        theme = "mbc",
         icons_enabled = true,
-        theme = 'pywal16-nvim',
         component_separators = {left = '', right = ''},
         section_separators = {left = '', right = ''},
         disabled_filetypes = {statusline = {}, winbar = {}},
         ignore_focus = {},
-        always_divide_middle = true,
         globalstatus = false,
         refresh = {statusline = 1000, tabline = 1000, winbar = 1000}
     },
