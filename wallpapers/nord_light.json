@@ -1,0 +1,26 @@
+{
+    "wallpaper": "/home/guilherme/.config/wallpapers/forest_2.jpg",
+  "special": {
+    "foreground": "#5e81ac",
+    "background": "#eceff4",
+    "cursor": "#5e81ac"
+  },
+  "colors": {
+    "color0": "#d8dee9",
+    "color1": "#bf616a",
+    "color2": "#a3be8c",
+    "color3": "#ebcb8b",
+    "color4": "#81a1c1",
+    "color5": "#B48EAD",
+    "color6": "#88C0D0",
+    "color7": "#E5E9F0",
+    "color8": "#4C566A",
+    "color9": "#bf616a",
+    "color10": "#a3be8c",
+    "color11": "#ebcb8b",
+    "color12": "#81a1c1",
+    "color13": "#B48EAD",
+    "color14": "#8FBCBB",
+    "color15": "#ECEFF4"
+  }
+}

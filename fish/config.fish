@@ -1,4 +1,10 @@
-cat ~/.cache/wal/sequences &
+# Check if not running inside Neovim
+if not set -q FISH_IN_NEOVIM
+    # Load Pure prompt here
+    cat ~/.cache/wal/sequences &
+    source ~/.config/fish/conf.d/pure.fish
+end
+
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
@@ -45,32 +51,32 @@ alias active_services="systemctl list-units --type=service --state=active"
 alias tmux="tmux -f /home/guilherme/.config/tmux/tmux.conf"
 alias dragon="dragon-drag-and-drop"
 alias dropon="dragon-drag-and-drop -t"
-alias yt="ytfzf -t"
+alias yt="ytfzf -t -l --async-thumbnails -s --sort-by=relevance --type=all"
+alias ytsubs="ytfzf -t -l --async-thumbnails -s --sort-by=upload_date -cSI"
+alias ytsubslist="ytfzf -t -l --async-thumbnails -s --sort-by=upload_date --type=channel (cat ~/.config/ytfzf/subscriptions | sed s'/.*#//' | fzf)"
 
-#pywal 
-#eval cat ~/.cache/wal/sequences &
-#source ~/.cache/wal/colors-tty.sh
 
-#envs
-
-fish_add_path /home/guilherme/go/bin
+fish_add_path /home/guilherme/.nimble/bin
+fish_add_path /usr/local/go/bin
 fish_add_path /home/guilherme/.opam/default/bin
 fish_add_path /home/guilherme/scripts
 fish_add_path /usr/local/bin
 fish_add_path /home/guilherme/.local/share/solana/install/active_release/bin
 fish_add_path /usr/lib/ruby/gems/3.0.0
 fish_add_path /home/guilherme/.local/share/gem/ruby/3.0.0
+fish_add_path /home/guilherme/.mix/escripts
+fish_add_path home/guilherme/.config/.foundry/bin
 
 set -x GOPATH $HOME/go
 set -x PATH $PATH $GOPATH/bin
-set -gx JAVA_HOME /usr/lib64/jvm/java-8-openjdk
 set -gx GOPATH /home/guilherme/go
-fish_add_path $JAVA_HOME/bin
 fish_add_path $GOPATH
-fish_add_path /home/guilherme/.nimble/bin:$PATH
-fish_add_path /home/guilherme/.mix/escripts:$PATH
+fish_add_path /home/guilherme/.nimble/bin
+fish_add_path /home/guilherme/.mix/escripts
 
 
+# LUAPATH/LUAROCKS
+for i in (luarocks path | awk '{sub(/PATH=/, "PATH ", $2); print "set -gx "$2}'); eval $i; end
 
 
 # XDG
@@ -99,3 +105,12 @@ alias list_wifi="nmcli c"
 alias luamake=/home/guilherme/.config/nvim/lua-language-server/3rd/luamake/luamake
 
 
+
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/guilherme/.ghcup/bin $PATH # ghcup-env
+
+
+set --universal nvm_default_version v21.6.2
+
+# Wasmer
+export WASMER_DIR="/home/guilherme/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"

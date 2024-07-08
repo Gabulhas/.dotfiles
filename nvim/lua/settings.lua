@@ -55,7 +55,7 @@ opt.synmaxcol = 240 -- max column for syntax highlight
 -- Colorscheme
 -----------------------------------------------------------
 -- cmd [[colorscheme mbc]]
--- cmd [[highlight MatchParen ctermfg=white ctermbg=green cterm=NONE]]
+cmd [[highlight MatchParen ctermfg=green ctermbg=white cterm=NONE]]
 
 -----------------------------------------------------------
 -- Tabs, indent
@@ -103,6 +103,8 @@ cmd [[
 	cnoreabbrev W w
 	cnoreabbrev Q q
 	cnoreabbrev Qall qall
+	cnoreabbrev Wqall wqall
+	cnoreabbrev wqa wqall
 ]]
 
 -----------------------------------------------------------
